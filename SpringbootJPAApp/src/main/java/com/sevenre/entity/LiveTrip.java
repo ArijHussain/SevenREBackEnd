@@ -45,6 +45,15 @@ public class LiveTrip {
    /* @Type(type = "MyJsonType")
     private StopReference stopReference;*/
 
+
+
+    /**
+     * The idea I got from http://www.thoughts-on-java.org/persist-postgresqls-jsonb-data-type-hibernate/
+     *
+     * GitHub : https://github.com/thjanssen/HibernateJSONBSupport
+     */
+
+
     @Type(type = "MyJsonType")
     private Trace trace;
 
