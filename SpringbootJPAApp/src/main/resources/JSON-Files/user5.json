@@ -1,0 +1,10 @@
+{
+name : "Janis",
+address : {
+        street : "Pirmasenser Strasee 38",
+        city : "Kaiserslautern",
+        zip : 67655
+
+} ,
+age: 28
+}
