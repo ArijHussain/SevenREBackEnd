@@ -19,7 +19,7 @@ public class TicketSale {
 
     @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_id")
-    private Trip trip;
+    private LiveTrip trip;
 
 
     @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
@@ -30,9 +30,9 @@ public class TicketSale {
     private Date timeStamp;
 
 
-    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+   /* @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "stop_id")
-    private Stop stop;
+    private Stop stop;*/
 
     private double price;
 

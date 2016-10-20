@@ -1,8 +1,6 @@
 package com.sevenre.controller;
 
 import com.sevenre.entity.LiveTrip;
-import com.sevenre.entity.Trip;
-import com.sevenre.entity.User;
 import com.sevenre.repository.LiveTripRepository;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

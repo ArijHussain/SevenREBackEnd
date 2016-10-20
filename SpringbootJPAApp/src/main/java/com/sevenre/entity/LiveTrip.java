@@ -38,12 +38,10 @@ public class LiveTrip {
 
     private String polyline;
 
-    //private String trace;
 
-    //private String stop_TimeStamp;
 
-   /* @Type(type = "MyJsonType")
-    private StopReference stopReference;*/
+    @Type(type = "JsonTypeStopReference")
+    private StopReference stopReference;
 
 
 
@@ -54,22 +52,17 @@ public class LiveTrip {
      */
 
 
-    @Type(type = "MyJsonType")
+    @Type(type = "MyJsonTypeTrace")
     private Trace trace;
 
 
-
-
-
-
-/*
     public StopReference getStopReference() {
         return stopReference;
     }
 
     public void setStopReference(StopReference stopReference) {
         this.stopReference = stopReference;
-    }*/
+    }
 
     public Trace getTrace() {
         return trace;
