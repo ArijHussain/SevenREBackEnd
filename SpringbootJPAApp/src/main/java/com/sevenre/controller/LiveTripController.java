@@ -48,10 +48,10 @@ public class LiveTripController {
 
 
     /**
-     * Save the livetrip
+     * Save the live trips
      */
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String addUser(@RequestBody List<LiveTrip> liveTrips){
+    public String addTrips(@RequestBody List<LiveTrip> liveTrips){
 
         liveTripRepository.save(liveTrips);
         return "LiveTrip created successfully!";
@@ -60,11 +60,11 @@ public class LiveTripController {
 
 
     /**
-     * Update the passed user (in RequestBody id should be the returned value of getTripId
+     * Update the passed trip (in RequestBody id should be the returned value of getTripId)
      */
 
     @RequestMapping( method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String editUser(@RequestBody LiveTrip liveTrip)  throws IOException{
+    public String editTrip(@RequestBody LiveTrip liveTrip)  throws IOException{
 
        /* Long id = liveTrip.getTripId();
         LiveTrip existing = getLiveTripById(id);
@@ -95,12 +95,24 @@ public class LiveTripController {
         //Driver
 
         liveTripRepository.save(liveTrip);
-        return "User updated successfully!";
+        return "Trip info updated successfully!";
+
+    }
+
+
+    /**
+     * Delete the live trip
+     */
+    @RequestMapping( method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String deleteTrip(@RequestBody LiveTrip liveTrip){
+
+        liveTripRepository.delete(liveTrip);
+        return "Trip deleted successfully!";
 
     }
 
     /**
-     * Return the user with the specific userId
+     * Return the Trip with the specific tripId
      */
     @RequestMapping( value = "/{id}", method = RequestMethod.GET)
     public LiveTrip getLiveTripById(@PathVariable long id){
@@ -108,23 +120,6 @@ public class LiveTripController {
 
     }
 
-    //read URL
-    public String readUrl(String urlString) throws IOException {
-        BufferedReader reader = null;
-        try {
-            URL url = new URL(urlString);
-            reader = new BufferedReader(new InputStreamReader(url.openStream()));
-            StringBuffer buffer = new StringBuffer();
-            int read;
-            char[] chars = new char[1024];
-            while ((read = reader.read(chars)) != -1)
-                buffer.append(chars, 0, read);
 
-            return buffer.toString();
-        } finally {
-            if (reader != null)
-                reader.close();
-        }
-    }
 
 }
