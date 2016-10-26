@@ -13,7 +13,7 @@ import java.util.Date;
 public class Driver {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long driverId;
 
     private String firstName;

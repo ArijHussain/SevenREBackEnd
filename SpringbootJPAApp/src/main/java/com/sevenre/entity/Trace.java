@@ -23,8 +23,6 @@ public class Trace  implements Serializable{
 
 
 
-
-
     public double getLatitude() {
         return latitude;
     }

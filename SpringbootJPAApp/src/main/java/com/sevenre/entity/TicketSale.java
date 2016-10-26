@@ -17,14 +17,11 @@ public class TicketSale {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ticketId;
 
-    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "trip_id")
-    private LiveTrip trip;
+
+    private long tripId;
 
 
-    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "driver_id")
-    private Driver driver;
+    private long driverId;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:mm:ss", timezone = "CET")
     private Date timeStamp;
@@ -33,6 +30,8 @@ public class TicketSale {
    /* @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "stop_id")
     private Stop stop;*/
+
+    private long stopId;
 
     private double price;
 

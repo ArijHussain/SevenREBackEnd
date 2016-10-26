@@ -7,8 +7,8 @@
 
         ),
         @TypeDef(
-                name="MyJsonTypeTrace",
-                typeClass=MyJsonTypeTrace.class
+                name="JsonTypeTrace",
+                typeClass=JsonTypeTrace.class
 
         )
 })

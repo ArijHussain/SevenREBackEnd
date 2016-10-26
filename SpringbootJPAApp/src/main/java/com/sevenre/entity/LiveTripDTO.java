@@ -1,23 +1,15 @@
 package com.sevenre.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
-@Entity
-@Table(name = "livetrips_info")
-
-public class LiveTrip {
+public class LiveTripDTO {
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long tripId;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:mm:ss", timezone = "CET")
@@ -38,39 +30,12 @@ public class LiveTrip {
 
     private String polyline;
 
-
-
     @Type(type = "JsonTypeStopReference")
     private StopReference stopReference;
 
 
-
-    /**
-     * The idea I got from http://www.thoughts-on-java.org/persist-postgresqls-jsonb-data-type-hibernate/
-     *
-     * GitHub : https://github.com/thjanssen/HibernateJSONBSupport
-     */
-
-
     @Type(type = "JsonTypeTrace")
     private Trace trace;
-
-
-    public StopReference getStopReference() {
-        return stopReference;
-    }
-
-    public void setStopReference(StopReference stopReference) {
-        this.stopReference = stopReference;
-    }
-
-    public Trace getTrace() {
-        return trace;
-    }
-
-    public void setTrace(Trace trace) {
-        this.trace = trace;
-    }
 
     public long getTripId() {
         return tripId;
@@ -128,6 +93,13 @@ public class LiveTrip {
         this.endLongitude = endLongitude;
     }
 
+    public long getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(long driverId) {
+        this.driverId = driverId;
+    }
 
     public String getPolyline() {
         return polyline;
@@ -137,12 +109,19 @@ public class LiveTrip {
         this.polyline = polyline;
     }
 
-
-    public long getDriverId() {
-        return driverId;
+    public StopReference getStopReference() {
+        return stopReference;
     }
 
-    public void setDriverId(long driverId) {
-        this.driverId = driverId;
+    public void setStopReference(StopReference stopReference) {
+        this.stopReference = stopReference;
+    }
+
+    public Trace getTrace() {
+        return trace;
+    }
+
+    public void setTrace(Trace trace) {
+        this.trace = trace;
     }
 }

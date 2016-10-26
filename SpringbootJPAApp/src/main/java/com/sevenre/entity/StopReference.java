@@ -13,6 +13,8 @@ public class StopReference implements Serializable {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:mm:ss", timezone = "CET")
     private Date timeStamp;
 
+
+
     public long getStopId() {
         return stopId;
     }
