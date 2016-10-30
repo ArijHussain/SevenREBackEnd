@@ -9,17 +9,31 @@ import java.io.Serializable;
 import java.util.Date;
 
 
+@Entity
+@Table(name = "live_location_update")
+@SqlResultSetMapping(name="tracemapping",
+        classes = {
+                @ConstructorResult(
+                        targetClass = TraceDTO.class,
+                        columns = {
+                                @ColumnResult(name = "tripId",type = Long.class),
+                                @ColumnResult(name = "timeStamp"),
+                                @ColumnResult(name = "latitude"),
+                                @ColumnResult(name = "longitude")
+                        })
+        })
+public class Trace{
 
-public class Trace  implements Serializable{
 
 
+    @EmbeddedId
+    private TraceKey traceKey;
 
     private double latitude;
 
     private double longitude;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:mm:ss", timezone = "CET")
-    private Date timeStamp;
+
 
 
 
@@ -39,11 +53,12 @@ public class Trace  implements Serializable{
         this.longitude = longitude;
     }
 
-    public Date getTimeStamp() {
-        return timeStamp;
+    public TraceKey getTraceKey() {
+        return traceKey;
     }
 
-    public void setTimeStamp(Date timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setTraceKey(TraceKey traceKey) {
+        this.traceKey = traceKey;
     }
+
 }

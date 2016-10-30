@@ -1,5 +1,6 @@
 package com.sevenre.controller;
 
+import com.sevenre.Service.StopService;
 import com.sevenre.entity.Driver;
 import com.sevenre.entity.Stop;
 import com.sevenre.repository.StopRepository;
@@ -13,13 +14,11 @@ import java.util.List;
 @RequestMapping(value = "/ws/stop")
 public class StopController {
 
-    private StopRepository stopRepository;
+    private StopService stopService;
 
-
-    public StopController(StopRepository stopRepository) {
-        this.stopRepository = stopRepository;
+    public StopController(StopService stopService) {
+        this.stopService = stopService;
     }
-
 
 
     /**
@@ -30,9 +29,7 @@ public class StopController {
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public String addStops(@RequestBody List<Stop> stops){
 
-
-        stopRepository.save(stops);
-        return "Stops created successfully!";
+        return stopService.addStops(stops);
 
     }
     /**
@@ -40,7 +37,7 @@ public class StopController {
      */
     @RequestMapping( method = RequestMethod.GET)
     public List<Stop> getAllStops(){
-        return stopRepository.findAll();
+        return stopService.getAllStops();
 
     }
 
@@ -49,8 +46,7 @@ public class StopController {
      */
     @RequestMapping( method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public String updateStop(@RequestBody Stop stop){
-        stopRepository.save(stop);
-        return "Stop information updated successfully!";
+        return stopService.updateStop(stop);
     }
 
 
@@ -60,8 +56,7 @@ public class StopController {
     @RequestMapping( method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public String deleteStop(@RequestBody Stop stop){
 
-        stopRepository.delete(stop);
-        return "Stop deleted successfully!";
+        return stopService.deleteStop(stop);
 
     }
 
@@ -71,7 +66,7 @@ public class StopController {
      */
     @RequestMapping( value = "/{id}", method = RequestMethod.GET)
     public Stop getStopById(@PathVariable long id){
-        return stopRepository.findOne(id);
+        return stopService.getStopById(id);
 
     }
 

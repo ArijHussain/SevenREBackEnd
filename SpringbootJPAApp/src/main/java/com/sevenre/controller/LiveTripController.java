@@ -1,7 +1,13 @@
 package com.sevenre.controller;
 
+import com.sevenre.Service.LiveTripService;
+import com.sevenre.Service.StopReferenceService;
+import com.sevenre.Service.TraceService;
 import com.sevenre.entity.*;
 import com.sevenre.repository.LiveTripRepository;
+import com.sevenre.repository.StopReferenceRepository;
+import com.sevenre.repository.TraceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,17 +15,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/ws/livetrips")
 public class LiveTripController {
 
-    private LiveTripRepository liveTripRepository;
 
 
-    public LiveTripController(LiveTripRepository liveTripRepository) {
-        this.liveTripRepository = liveTripRepository;
+
+
+    private LiveTripService liveTripService;
+
+    public LiveTripController(LiveTripService liveTripService) {
+        this.liveTripService = liveTripService;
     }
 
 
@@ -28,7 +38,8 @@ public class LiveTripController {
      */
     @RequestMapping( method = RequestMethod.GET)
     public List<LiveTrip> getAllTrips(){
-        return liveTripRepository.findAll();
+
+        return liveTripService.getAllTrips();
 
     }
 
@@ -39,10 +50,7 @@ public class LiveTripController {
     @RequestMapping(value = "/reqtripid", method = RequestMethod.GET)
     public long getTripId(){
 
-        LiveTrip liveTrip = new LiveTrip();
-        liveTripRepository.save(liveTrip);
-        return  liveTrip.getTripId();
-       // TODO: Add code and logic
+        return  liveTripService.getTripId();
     }
 
 
@@ -51,10 +59,9 @@ public class LiveTripController {
      * Save the live trips
      */
     @RequestMapping( method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String addTrips(@RequestBody List<LiveTrip> liveTrips){
+    public String addTrips(@RequestBody LiveTrip liveTrip){
 
-        liveTripRepository.save(liveTrips);
-        return "LiveTrip created successfully!";
+        return  liveTripService.addTrips(liveTrip);
 
     }
 
@@ -64,38 +71,9 @@ public class LiveTripController {
      */
 
     @RequestMapping( method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String editTrip(@RequestBody LiveTrip liveTrip)  throws IOException{
+    public String editTrip(@RequestBody LiveTrip liveTrip) {
 
-       /* Long id = liveTrip.getTripId();
-        LiveTrip existing = getLiveTripById(id);
-        Trace trace = new Trace();
-        if (existing != null ){
-            trace = existing.getTrace();
-        }
-
-
-            traceList.add(trace1);
-
-
-            traceList.add(trace2);
-
-
-        liveTrip.setTrace(traceList);*/
-       /* LiveTrip liveTrip = new LiveTrip();
-
-        String json = readUrl("http://localhost:8080/ws/driver/"+liveTripDTO.getDriverId());
-        Gson gson = new Gson();
-        Type type = new TypeToken<Driver>() {}.getType();
-
-        Driver driver = gson.fromJson(json, type);
-        liveTrip.setDriverId(driver);
-        liveTrip.setEndLatitude(liveTripDTO.getEndLatitude());
-        liveTrip.setEndLongitude(liveTripDTO.getEndLongitude());*/
-
-        //Driver
-
-        liveTripRepository.save(liveTrip);
-        return "Trip info updated successfully!";
+        return liveTripService.editTrip(liveTrip);
 
     }
 
@@ -106,8 +84,7 @@ public class LiveTripController {
     @RequestMapping( method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public String deleteTrip(@RequestBody LiveTrip liveTrip){
 
-        liveTripRepository.delete(liveTrip);
-        return "Trip deleted successfully!";
+        return liveTripService.deleteTrip(liveTrip);
 
     }
 
@@ -116,7 +93,8 @@ public class LiveTripController {
      */
     @RequestMapping( value = "/{id}", method = RequestMethod.GET)
     public LiveTrip getLiveTripById(@PathVariable long id){
-        return liveTripRepository.findOne(id);
+
+       return liveTripService.getLiveTripById(id);
 
     }
 

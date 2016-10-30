@@ -12,7 +12,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "livetrips_info")
-
 public class LiveTrip {
 
 
@@ -40,9 +39,11 @@ public class LiveTrip {
 
 
 
-    @Type(type = "JsonTypeStopReference")
-    private StopReference stopReference;
+    /*@Type(type = "JsonTypeStopReference")
+    private StopReference stopReference;*/
 
+    @Transient
+    private List<StopReference> stopReferences;
 
 
     /**
@@ -50,26 +51,27 @@ public class LiveTrip {
      *
      * GitHub : https://github.com/thjanssen/HibernateJSONBSupport
      */
+    @Transient
+    private List<Trace> traces;
+
+    /*@Type(type = "JsonTypeTrace")
+    private Trace trace;*/
 
 
-    @Type(type = "JsonTypeTrace")
-    private Trace trace;
-
-
-    public StopReference getStopReference() {
-        return stopReference;
+    public List<StopReference> getStopReference() {
+        return stopReferences;
     }
 
-    public void setStopReference(StopReference stopReference) {
-        this.stopReference = stopReference;
+    public void setStopReference(List<StopReference> stopReferences) {
+        this.stopReferences = stopReferences;
     }
 
-    public Trace getTrace() {
-        return trace;
+    public List<Trace> getTrace() {
+        return traces;
     }
 
-    public void setTrace(Trace trace) {
-        this.trace = trace;
+    public void setTrace(List<Trace> traces) {
+        this.traces = traces;
     }
 
     public long getTripId() {
