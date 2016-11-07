@@ -46,11 +46,7 @@ public class LiveTrip {
     private List<StopReference> stopReferences;
 
 
-    /**
-     * The idea I got from http://www.thoughts-on-java.org/persist-postgresqls-jsonb-data-type-hibernate/
-     *
-     * GitHub : https://github.com/thjanssen/HibernateJSONBSupport
-     */
+
     @Transient
     private List<Trace> traces;
 
@@ -138,6 +134,14 @@ public class LiveTrip {
     public void setPolyline(String polyline) {
         this.polyline = polyline;
     }
+
+ /*   public Driver getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(Driver driverId) {
+        this.driverId = driverId;
+    }*/
 
 
     public long getDriverId() {

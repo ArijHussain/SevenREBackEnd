@@ -10,8 +10,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ticket_information")
-@Getter
-@Setter
+
 public class TicketSale {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,4 +37,59 @@ public class TicketSale {
     private String ticketType;
 
 
+    public long getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(long ticketId) {
+        this.ticketId = ticketId;
+    }
+
+    public long getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(long tripId) {
+        this.tripId = tripId;
+    }
+
+    public long getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(long driverId) {
+        this.driverId = driverId;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public long getStopId() {
+        return stopId;
+    }
+
+    public void setStopId(long stopId) {
+        this.stopId = stopId;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getTicketType() {
+        return ticketType;
+    }
+
+    public void setTicketType(String ticketType) {
+        this.ticketType = ticketType;
+    }
 }

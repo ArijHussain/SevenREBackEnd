@@ -1,5 +1,6 @@
 package com.sevenre.Service;
 
+import com.sevenre.entity.Driver;
 import com.sevenre.entity.LiveTrip;
 import com.sevenre.entity.StopReference;
 import com.sevenre.entity.Trace;
@@ -27,13 +28,16 @@ public class LiveTripService {
 
     private StopReferenceService stopReferenceService;
 
+    private DriverService driverService;
 
-    public LiveTripService(TraceService traceService,StopReferenceService stopReferenceService,LiveTripRepository liveTripRepository, StopReferenceRepository stopReferenceRepository, TraceRepository traceRepository) {
+
+    public LiveTripService(TraceService traceService,StopReferenceService stopReferenceService,LiveTripRepository liveTripRepository, StopReferenceRepository stopReferenceRepository, TraceRepository traceRepository,DriverService driverService) {
         this.liveTripRepository = liveTripRepository;
         this.stopReferenceRepository = stopReferenceRepository;
         this.traceRepository = traceRepository;
         this.traceService = traceService;
         this.stopReferenceService = stopReferenceService;
+        this.driverService = driverService;
     }
 
 
@@ -61,7 +65,16 @@ public class LiveTripService {
     }
 
     public String addTrips(LiveTrip liveTrip){
+
+        Driver driver = driverService.getDriverById(liveTrip.getDriverId());
+
+        if(driver == null){
+            return "Driver not found. Please check the Driver Id.";
+        }
+
+
         liveTripRepository.save(liveTrip);
+
         if(liveTrip.getStopReference()!=null) {
             List<StopReference> stopReference = liveTrip.getStopReference();
             stopReferenceRepository.save(stopReference);
@@ -74,7 +87,11 @@ public class LiveTripService {
     }
 
     public String editTrip(LiveTrip liveTrip){
+        Driver driver = driverService.getDriverById(liveTrip.getDriverId());
 
+        if(driver == null){
+            return "Driver not found. Please check the Driver Id.";
+        }
         if(liveTrip.getStopReference()!=null) {
             List<StopReference> stopReference = liveTrip.getStopReference();
             stopReferenceRepository.save(stopReference);
